@@ -1,0 +1,11 @@
+tools/*.log
+tools/github-account.txt
+tools/next-commit-message.txt
+*.bat
+tools/*.ps1
+assets/img/*.png
+assets/img/portrait.jpg
+tools/preview/
+drafts/
+fit-first.html
+assets/img/fit-first*
