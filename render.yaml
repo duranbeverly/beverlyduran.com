@@ -37,7 +37,7 @@ services:
         value: "604800"
 
   - type: web
-    name: be-leaf-in-yourself
+    name: be-leaf
     runtime: python
     plan: free
     repo: https://github.com/duranbeverly/be-leaf
