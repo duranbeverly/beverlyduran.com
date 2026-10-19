@@ -58,13 +58,16 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* ---- Top bar ---- */
 .top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; flex-wrap: wrap; }
-.top .name { display: inline-flex; align-items: center; gap: 12px; font: 700 20px/1 var(--display); color: var(--ink); text-decoration: none; letter-spacing: -0.2px; }
+.top .name { font: 700 20px/1 var(--display); color: var(--ink); text-decoration: none; letter-spacing: -0.2px; }
 .top nav { display: flex; gap: 22px; flex-wrap: wrap; }
 .top nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
 .top nav a:hover, .top nav a[aria-current] { color: var(--ink); }
 
-/* Small photo so people know it's me; decorative, so alt is empty (the name sits beside it). */
-.avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+/* Contact: a small photo so people know who they're writing to. */
+.hello { display: flex; gap: 20px; align-items: center; margin-bottom: 4px; }
+.hello-photo { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; flex: none; border: 3px solid var(--panel); box-shadow: 0 0 0 1px var(--line); }
+.hello .section-intro { margin-bottom: 0; }
+#contact .contact { margin-top: 24px; }
 
 /* ---- Hero ---- */
 .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 56px; align-items: center; padding: 48px 0 72px; }
