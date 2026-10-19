@@ -1,0 +1,95 @@
+# Deploys all three portfolio apps on Render's free plan in one go.
+# They share one free Neon Postgres database; each app keeps its tables in its own schema.
+# Render asks for DATABASE_URL once (the "portfolio-db" group): paste the Neon connection string.
+
+envVarGroups:
+  - name: portfolio-db
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+
+services:
+  - type: web
+    name: bevbnb
+    runtime: node
+    plan: free
+    repo: https://github.com/duranbeverly/BevBNB-Project
+    branch: main
+    buildCommand: >-
+      npm install &&
+      npm run render-postbuild &&
+      npm run build &&
+      npm run sequelize --prefix backend db:migrate &&
+      npm run sequelize --prefix backend db:seed:all
+    startCommand: npm start
+    healthCheckPath: /api/spots
+    envVars:
+      - fromGroup: portfolio-db
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "20"
+      - key: SCHEMA
+        value: bevbnb_schema
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: "604800"
+
+  - type: web
+    name: be-leaf-in-yourself
+    runtime: python
+    plan: free
+    repo: https://github.com/duranbeverly/be-leaf
+    branch: main
+    buildCommand: >-
+      pip install -r requirements.txt &&
+      npm install --prefix react-app &&
+      npm run build --prefix react-app &&
+      flask db upgrade &&
+      flask seed all
+    startCommand: gunicorn app:app
+    healthCheckPath: /api/plants
+    envVars:
+      - fromGroup: portfolio-db
+      - key: FLASK_APP
+        value: app
+      - key: FLASK_ENV
+        value: production
+      - key: SCHEMA
+        value: beleaf_schema
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: NODE_VERSION
+        value: "20"
+      - key: SECRET_KEY
+        generateValue: true
+
+  - type: web
+    name: discordia
+    runtime: python
+    plan: free
+    repo: https://github.com/duranbeverly/Discord-Clone
+    branch: main
+    buildCommand: >-
+      pip install -r requirements.txt &&
+      npm install --prefix react-app &&
+      npm run build --prefix react-app &&
+      flask db upgrade &&
+      flask seed all
+    startCommand: gunicorn -w 1 --threads 100 app:app
+    healthCheckPath: /
+    envVars:
+      - fromGroup: portfolio-db
+      - key: FLASK_APP
+        value: app
+      - key: FLASK_ENV
+        value: production
+      - key: SCHEMA
+        value: discordia_schema
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: NODE_VERSION
+        value: "20"
+      - key: SECRET_KEY
+        generateValue: true
