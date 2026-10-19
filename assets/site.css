@@ -59,7 +59,7 @@ a:hover { text-decoration-thickness: 2px; }
 /* ---- Top bar ---- */
 .top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; flex-wrap: wrap; }
 .top .name { font: 700 20px/1 var(--display); color: var(--ink); text-decoration: none; letter-spacing: -0.2px; }
-.top nav { display: flex; gap: 22px; flex-wrap: wrap; }
+.top nav { display: flex; gap: 22px; flex-wrap: wrap; margin-left: auto; }
 .top nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
 .top nav a:hover, .top nav a[aria-current] { color: var(--ink); }
 
@@ -174,7 +174,11 @@ p { max-width: var(--measure); }
 /* Contact */
 .contact { display: flex; gap: 28px; flex-wrap: wrap; align-items: baseline; font-size: 18px; }
 footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.theme-toggle { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 999px; padding: 4px 12px; font: inherit; cursor: pointer; }
+.theme-toggle { display: inline-flex; align-items: center; gap: 6px; background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 999px; padding: 6px 12px; font: 600 14px/1 var(--body); cursor: pointer; min-height: 36px; }
+.theme-toggle:hover { border-color: var(--ink); }
+.theme-toggle .ico { font-size: 15px; }
+.top { position: relative; }
+@media (max-width: 600px) { .theme-toggle .lbl { display: none; } .theme-toggle { padding: 6px 10px; order: 2; margin-left: auto; } .top nav { order: 3; width: 100%; margin-left: 0; gap: 18px; } }
 
 /* Case-study pages */
 .cs-head { padding: 32px 0 40px; }

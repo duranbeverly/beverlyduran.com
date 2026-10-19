@@ -10,13 +10,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@400;600;700&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
-  <script>try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  <script>(function(){var t='dark';try{t=localStorage.getItem('theme')||'dark'}catch(e){}document.documentElement.dataset.theme=t})();</script>
 </head>
 <body>
   <div class="wrap">
     <header class="top">
       <a class="name" href="/index.html">Beverly Duran</a>
       <nav aria-label="Main"><a href="/index.html#leadership">Leadership</a><a href="/index.html#work">Projects</a><a href="/index.html#path">Experience</a><a href="/index.html#contact">Contact</a></nav>
+      <button class="theme-toggle" type="button" id="theme" aria-label="Switch to light mode"><span class="ico" aria-hidden="true">☀</span><span class="lbl">Light</span></button>
     </header>
 
     <main>
@@ -30,7 +31,7 @@
 
     <footer>
       <span>© 2026 Beverly Duran</span>
-      <button class="theme-toggle" type="button" id="theme">Switch theme</button>
+      
     </footer>
   </div>
   <script src="/assets/site.js"></script>

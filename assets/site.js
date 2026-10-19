@@ -1,15 +1,19 @@
-// Theme switch: follows the system by default; the choice is remembered on this device.
+// Theme switch: dark by default; the choice is remembered on this device.
 (function () {
   const btn = document.getElementById('theme');
   if (!btn) return;
   const root = document.documentElement;
-  const current = () => root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  const label = () => { btn.textContent = current() === 'dark' ? 'Light theme' : 'Dark theme'; };
+  const current = () => root.dataset.theme || 'dark';
+  const label = () => {
+    const dark = current() === 'dark';
+    btn.querySelector('.ico').textContent = dark ? '☀' : '☾';
+    btn.querySelector('.lbl').textContent = dark ? 'Light' : 'Dark';
+    btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  };
   label();
   btn.addEventListener('click', () => {
-    const next = current() === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = next;
-    try { localStorage.setItem('theme', next); } catch (e) {}
+    root.dataset.theme = current() === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
     label();
   });
 })();
